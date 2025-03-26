@@ -43,7 +43,7 @@ namespace MediaTekDocuments.dal
         /// méthode HTTP pour update
         private const string DELETE = "DELETE";     //Ajout de cette ligne pour DELETE un objet dans la BDD
         /// <summary>
-        /// nom de connexion à la bdd
+        /// nom de connexion à la BDD
         /// </summary>
         private static readonly string connectionName = "Mediatek.Properties.Settings.mediatekConnectionString";
 
