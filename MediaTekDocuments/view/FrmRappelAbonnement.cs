@@ -15,6 +15,10 @@ namespace MediaTekDocuments.view
     public partial class FrmRappelAbonnement : Form
     {
         private readonly FrmMediatekController controller;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrmRappelAbonnement"/> class.
+        /// </summary>
         public FrmRappelAbonnement()
         {
             InitializeComponent();
@@ -23,16 +27,31 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgRappelRevue = new BindingSource();
         private List<Abonnement> lesRappels = new List<Abonnement>();
 
+        /// <summary>
+        /// Handles the click event of the "Close" button.
+        /// Closes the current form.
+        /// </summary>
         private void btnFermerRappel_Click(object sender, EventArgs e)
         {
             this.Close();
             
         }
+
+        /// <summary>
+        /// Handles the load event of the form.
+        /// Fetches the list of reminders and populates the DataGridView.
+        /// </summary>
         private void FrmRappelAbonnement_Load(object sender, EventArgs e)
         {
             lesRappels = controller.GetAllRappelRevue();
             RemplirRappelRevueListe(lesRappels);
         }
+
+        /// <summary>
+        /// Populates the DataGridView with the provided list of reminders.
+        /// Configures the visibility and layout of the columns.
+        /// </summary>
+        /// <param name="lesRappels">The list of reminders to display.</param>
         private void RemplirRappelRevueListe(List<Abonnement> lesRappels)
         {
             if (lesRappels != null)

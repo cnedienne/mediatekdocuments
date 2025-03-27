@@ -1295,6 +1295,9 @@ namespace MediaTekDocuments.view
             txbLivresComRayon.Text = livre.Rayon;
         }
 
+        /// <summary>
+        /// Vide les zones de recherche et d'informations pour les livres.
+       /// </summary>
         private void ViderInfosLivresCom()
         {
             txbLivresComISBN.Text = "";
@@ -1373,6 +1376,10 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Affiche les informations d'une commande de livres dans les champs correspondants.
+        /// </summary>
+        /// <param name="commande">La commande de type CommandeDocument dont les informations doivent être affichées.</param>
         private void AfficherCommandeLivresInfos(CommandeDocument commande)
         {
             txbNumCommande.Text = commande.id;
@@ -1409,6 +1416,9 @@ namespace MediaTekDocuments.view
 
         }
 
+    /// <summary>
+    /// Vide les champs d'informations liés aux commandes.
+    /// </summary>
         private void ViderInfosCommandes()
         {
             txbNumCommande.Text = "";
@@ -1416,7 +1426,12 @@ namespace MediaTekDocuments.view
             txbMontant.Text = "";
             dtpDateCommande.Value = DateTime.Now;
         }
-
+    /// <summary>
+    /// Gère l'événement de clic sur le bouton "Ajouter Commande".
+    /// Vide les champs de commande et affiche les boutons de validation et d'annulation.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnAjouterCommande_Click(object sender, EventArgs e)
         {
             ViderInfosCommandes();
@@ -1425,7 +1440,12 @@ namespace MediaTekDocuments.view
             ViderInfosSuivi();
         }
 
-
+    /// <summary>
+    /// Gère l'événement de clic sur le bouton "Supprimer Commande".
+    /// Supprime une commande si elle est en cours ou relancée.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnSupprimerCommande_Click(object sender, EventArgs e)
         {
             CommandeDocument commande = (CommandeDocument)bdgLivresComListe.List[bdgLivresComListe.Position];
@@ -1451,7 +1471,12 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Cette commande ne peut pas être supprimée", "Erreur");
             }
         }
-
+    /// <summary>
+    /// Gère l'événement de clic sur le bouton "Valider Commande".
+    /// Valide et enregistre une nouvelle commande si les champs sont correctement remplis.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnValiderCommande_Click(object sender, EventArgs e)
         {
             if (!txbNumCommande.Text.Equals("") && !txbNbExemplaire.Text.Equals("") && !txbMontant.Text.Equals(""))
@@ -1491,7 +1516,12 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("tous les champs sont obligatoires", "Information");
             }
         }
-
+     /// <summary>
+    /// Gère l'événement de clic sur le bouton "Annuler Commande".
+    /// Réinitialise les champs de commande et masque les boutons de validation et d'annulation.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnAnnulerCommande_Click(object sender, EventArgs e)
         {
             ViderInfosCommandes();
@@ -1499,8 +1529,12 @@ namespace MediaTekDocuments.view
             btnValiderCommande.Visible = false;
         }
 
-        /*                  SUIVI COMMANDE              */
-
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Suivi Commande".
+        /// Active le groupBox pour la gestion du suivi et initialise les étapes possibles en fonction de l'état actuel.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnSuiviCommande_Click(object sender, EventArgs e)
         {
             groupBox3.Enabled = true;
@@ -1527,7 +1561,9 @@ namespace MediaTekDocuments.view
 
             }
         }
-
+    /// <summary>
+    /// Réinitialise les champs liés au suivi des commandes et désactive le groupBox.
+    /// </summary>
         private void ViderInfosSuivi()
         {
             txbEtapeSuivi.Text = "";
@@ -1535,12 +1571,22 @@ namespace MediaTekDocuments.view
             cbxEtapeSuivi.Visible = false;
             groupBox3.Enabled = false;
         }
-
+    /// <summary>
+    /// Gère l'événement de clic sur le bouton "Annuler Suivi".
+    /// Réinitialise les informations de suivi.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnAnnulerSuivi_Click(object sender, EventArgs e)
         {
             ViderInfosSuivi();
         }
-
+    /// <summary>
+    /// Gère l'événement de clic sur le bouton "Modifier Suivi Commande".
+    /// Affiche les options pour modifier l'étape de suivi.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnModifierSuiviCommande_Click(object sender, EventArgs e)
         {
             cbxEtapeSuivi.Visible = true;
@@ -1571,7 +1617,12 @@ namespace MediaTekDocuments.view
             }
             return idSuivi;
         }
-
+    /// <summary>
+    /// Gère l'événement de clic sur le bouton "Valider Suivi".
+    /// Met à jour l'étape de suivi de la commande sélectionnée.
+    /// </summary>
+    /// <param name="sender">Objet source de l'événement.</param>
+    /// <param name="e">Données de l'événement.</param>
         private void btnValiderSuivi_Click(object sender, EventArgs e)
         {
             if (!cbxEtapeSuivi.Text.Equals(""))
@@ -1649,6 +1700,9 @@ namespace MediaTekDocuments.view
             txbDvdsComRayon.Text = dvd.Rayon;
         }
 
+        /// <summary>
+        /// Vide les zones d'affichage des informations liées à une commande de DVD.
+        /// </summary>
         private void ViderInfosDvdsCom()
         {
             txbDvdsComRealisateur.Text = "";
@@ -1703,6 +1757,10 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Affiche les informations d'une commande de DVD dans les champs correspondants.
+        /// </summary>
+        /// <param name="commande">La commande de type CommandeDocument dont les informations doivent être affichées.</param>
         private void AfficherCommandeDvdsInfos(CommandeDocument commande)
         {
             txbNumCommandeDvds.Text = commande.id;
@@ -1738,7 +1796,12 @@ namespace MediaTekDocuments.view
             RemplirDvdsListeCom(sortedList);
         }
 
-
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Valider Commande DVD".
+        /// Valide et enregistre une nouvelle commande de DVD si les champs sont correctement remplis.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnValiderCommandeDvds_Click(object sender, EventArgs e)
         {
             if (!txbNumCommandeDvds.Text.Equals("") && !txbNbExemplaireDvds.Text.Equals("") && !txbMontantDvds.Text.Equals(""))
@@ -1779,6 +1842,12 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Gère l'événement d'entrée dans l'onglet "Commande de DVDs".
+        /// Réinitialise la liste des commandes de DVDs affichées dans le DataGrid.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void TabDvdsCom_Enter(object sender, EventArgs e)
         {
             RemplirDvdsListeCom(null);
@@ -1786,11 +1855,8 @@ namespace MediaTekDocuments.view
 
 
         /// <summary>
-        /// Tri sur les colonnes
+        /// Vide les champs d'affichage des informations liés à une commande de DVD.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-       
         private void ViderInfosCommandesDvds()
         {
             txbNumCommandeDvds.Text = "";
@@ -1799,6 +1865,12 @@ namespace MediaTekDocuments.view
             dtpDateCommandeDvds.Value = DateTime.Now;
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Ajouter Commande DVD".
+        /// Vide les champs de commande et affiche les boutons de validation et d'annulation.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnAjouterCommandeDvds_Click(object sender, EventArgs e)
         {
             ViderInfosCommandesDvds();
@@ -1807,6 +1879,12 @@ namespace MediaTekDocuments.view
             ViderInfosSuiviDvds();
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Supprimer Commande DVD".
+        /// Supprime une commande de DVD si elle est en cours ou relancée.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnSupprimerCommandeDvds_Click(object sender, EventArgs e)
         {
             CommandeDocument commande = (CommandeDocument)bdgDvdsComListe.List[bdgDvdsComListe.Position];
@@ -1831,8 +1909,12 @@ namespace MediaTekDocuments.view
             }
         }
 
-
-
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Annuler Commande DVD".
+        /// Réinitialise les champs de commande et masque les boutons de validation et d'annulation.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnAnnulerCommandeDvds_Click(object sender, EventArgs e)
         {
             ViderInfosCommandesDvds();
@@ -1842,6 +1924,12 @@ namespace MediaTekDocuments.view
 
         /*                  SUIVI COMMANDE              */
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Suivi Commande DVD".
+        /// Active le groupBox pour la gestion du suivi et initialise les étapes possibles en fonction de l'état actuel.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnSuiviCommandeDvds_Click(object sender, EventArgs e)
         {
             groupBox3.Enabled = true;
@@ -1868,6 +1956,9 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Réinitialise les champs liés au suivi des commandes de DVD et désactive le groupBox.
+        /// </summary>
         private void ViderInfosSuiviDvds()
         {
             txbEtapeSuiviDvds.Text = "";
@@ -1876,17 +1967,34 @@ namespace MediaTekDocuments.view
             groupBox3.Enabled = false;
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Annuler Suivi DVD".
+        /// Réinitialise les informations de suivi.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnAnnulerSuiviDvds_Click(object sender, EventArgs e)
         {
             ViderInfosSuiviDvds();
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Modifier Suivi Commande DVD".
+        /// Affiche les options pour modifier l'étape de suivi.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnModifierSuiviCommandeDvds_Click(object sender, EventArgs e)
         {
             cbxEtapeSuiviDvds.Visible = true;
             btnValiderSuiviDvds.Visible = true;
         }
 
+        /// <summary>
+        /// Convertit une étape de suivi en son identifiant correspondant.
+        /// </summary>
+        /// <param name="etapeSuivi">L'étape de suivi à convertir.</param>
+        /// <returns>L'identifiant correspondant à l'étape de suivi.</returns>
         private string ConvertitIdSuiviDvds(string etapeSuivi)
         {
             string idSuivi;
@@ -1911,6 +2019,12 @@ namespace MediaTekDocuments.view
             return idSuivi;
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Valider Suivi DVD".
+        /// Met à jour l'étape de suivi de la commande sélectionnée.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnValiderSuiviDvds_Click(object sender, EventArgs e)
         {
             if (!cbxEtapeSuiviDvds.Text.Equals(""))
@@ -1974,6 +2088,10 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Affiche les informations d'une revue dans les champs correspondants.
+        /// </summary>
+        /// <param name="revue">La revue dont les informations doivent être affichées.</param>
         private void AfficherInfosRevuesCommande(Revue revue)
         {
             txbRevuesComDelai.Text = revue.DelaiMiseADispo.ToString();
@@ -1985,6 +2103,9 @@ namespace MediaTekDocuments.view
             txbRevuesComRayon.Text = revue.Rayon;
         }
 
+        /// <summary>
+        /// Vide les champs d'affichage des informations liés à une revue.
+        /// </summary>
         private void ViderInfosRevuesCom()
         {
             txbRevuesComDelai.Text = "";
@@ -1996,6 +2117,10 @@ namespace MediaTekDocuments.view
             txbRevuesComRayon.Text = "";
         }
 
+        /// <summary>
+        /// Remplit la liste des abonnements de revues dans le DataGrid.
+        /// </summary>
+        /// <param name="lesAbonnementsRevues">Liste des abonnements de revues à afficher.</param>
         private void RemplirRevuesListeCom(List<Abonnement> lesAbonnementsRevues)
         {
             if (lesAbonnementsRevues != null)
@@ -2017,6 +2142,12 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Gère l'événement de sélection d'une ligne ou cellule dans le DataGrid des abonnements de revues.
+        /// Affiche les informations de l'abonnement sélectionné et vide les champs d'abonnement.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void DgvRevuesComListeCom_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvRevuesComListe.CurrentCell != null)
@@ -2027,6 +2158,10 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Affiche les informations d'un abonnement de revue dans les champs correspondants.
+        /// </summary>
+        /// <param name="Revues">L'abonnement de type Abonnement dont les informations doivent être affichées.</param>
         private void AfficherAbonnementsRevuesInfos(Abonnement Revues)
         {
             txbNumCommandeRevues.Text = Revues.id;
@@ -2035,6 +2170,12 @@ namespace MediaTekDocuments.view
             dtpDateCommandeRevues.Value = Revues.dateCommande;
         }
 
+        /// <summary>
+        /// Gère le tri des colonnes dans le DataGrid des abonnements de revues.
+        /// Trie les abonnements en fonction de la colonne sélectionnée.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void DgvRevuesComListeCom_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string titreColonne = dgvRevuesComListe.Columns[e.ColumnIndex].HeaderText;
@@ -2054,6 +2195,12 @@ namespace MediaTekDocuments.view
             RemplirRevuesListeCom(sortedList);
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Valider Abonnement Revue".
+        /// Valide et enregistre un nouvel abonnement de revue si les champs sont correctement remplis.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnValiderAboRevues_Click(object sender, EventArgs e)
         {
             if (!txbNumCommandeRevues.Text.Equals("") && !txbMontantRevues.Text.Equals(""))
@@ -2092,11 +2239,23 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Gère l'événement d'entrée dans l'onglet "Commande de Revues".
+        /// Réinitialise la liste des abonnements de revues affichés dans le DataGrid.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void TabRevuesCom_Enter(object sender, EventArgs e)
         {
             RemplirRevuesListeCom(null);
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Annuler Abonnement Revue".
+        /// Réinitialise les champs d'abonnement et masque les boutons de validation et d'annulation.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnAnnulerAboRevues_Click(object sender, EventArgs e)
         {
             ViderInfosAboRevues();
@@ -2115,13 +2274,24 @@ namespace MediaTekDocuments.view
             dtpFinRevues.Value = DateTime.Now;
         }
 
-
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Ajouter Abonnement Revue".
+        /// Vide les champs d'abonnement et affiche le bouton de validation.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnAjoutAboRevues_Click(object sender, EventArgs e)
         {
             ViderInfosAboRevues();
             btnValiderAboRevues.Visible = true;
         }
 
+        /// <summary>
+        /// Gère l'événement de clic sur le bouton "Supprimer Abonnement Revue".
+        /// Supprime un abonnement de revue si aucun exemplaire ne correspond à la période de l'abonnement.
+        /// </summary>
+        /// <param name="sender">Objet source de l'événement.</param>
+        /// <param name="e">Données de l'événement.</param>
         private void btnSupprimerAboRevues_Click(object sender, EventArgs e)
         {
             Abonnement abonnement = (Abonnement)bdgRevuesComListe.List[bdgRevuesComListe.Position];
@@ -2150,11 +2320,25 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Vérifie si une date de parution est comprise dans la période de l'abonnement.
+        /// </summary>
+        /// <param name="dateCommande">Date de commande de l'abonnement.</param>
+        /// <param name="dateFinAbonnement">Date de fin de l'abonnement.</param>
+        /// <param name="dateParution">Date de parution de l'exemplaire.</param>
+        /// <returns>True si la date de parution est dans la période, sinon False.</returns>
         private bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFinAbonnement, DateTime dateParution)
         {
             return dateParution >= dateCommande && dateParution <= dateFinAbonnement;
         }
 
+        /// <summary>
+        /// Vérifie si aucun exemplaire ne correspond à la période de l'abonnement.
+        /// </summary>
+        /// <param name="lesExemplaires">Liste des exemplaires.</param>
+        /// <param name="dateFinAbonnement">Date de fin de l'abonnement.</param>
+        /// <param name="dateCommande">Date de commande de l'abonnement.</param>
+        /// <returns>True si aucun exemplaire ne correspond, sinon False.</returns>
         private bool Exemplaire(List<Exemplaire> lesExemplaires, DateTime dateFinAbonnement, DateTime dateCommande)
         {
             foreach (var exemplaire in lesExemplaires)

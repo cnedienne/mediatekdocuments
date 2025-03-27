@@ -43,7 +43,7 @@ namespace MediaTekDocuments.dal
         /// méthode HTTP pour update
         private const string DELETE = "DELETE";     //Ajout de cette ligne pour DELETE un objet dans la BDD
         /// <summary>
-        /// nom de connexion à la BDD
+        /// nom de connexion à la bdd
         /// </summary>
         private static readonly string connectionName = "Mediatek.Properties.Settings.mediatekConnectionString";
 
@@ -59,7 +59,7 @@ namespace MediaTekDocuments.dal
                 Log.Logger = new LoggerConfiguration()
                     .MinimumLevel.Verbose()
                     .WriteTo.Console()
-                    .WriteTo.File("logs/log.txt")
+                    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
                     .CreateLogger();
                 connectionString = GetConnectionStringByName(connectionName);
                 api = ApiRest.GetInstance(uriApi, connectionString);
@@ -198,7 +198,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Log.Error("Erreur lors de la création d'un exemplaire : {0}", ex.Message);
             }
             return false;
         }
@@ -218,7 +218,7 @@ namespace MediaTekDocuments.dal
             }
             catch
             {
-                Console.WriteLine("ERREUR DANS LA REQUETE POST");
+                Log.Error("Erreur dans la requête POST pour la commande.");
             }
             return false;
         }
@@ -238,11 +238,16 @@ namespace MediaTekDocuments.dal
             }
             catch
             {
-                Console.WriteLine("ERREUR DANS LA REQUETE POST");
+                Log.Error("Erreur dans la requête POST pour la commande document.");
             }
             return false;
         }
 
+/// <summary>
+        /// Supprime une commande de la base de données.
+        /// </summary>
+        /// <param name="id">Identifiant de la commande à supprimer.</param>
+        /// <returns>True si la suppression a réussi, sinon False.</returns>
         public bool SupprimerCommande(string id)
         {
             String jsonId = "{ \"id\" : \"" + id + "\"}";
@@ -253,12 +258,17 @@ namespace MediaTekDocuments.dal
             }
             catch 
             {
-                Console.WriteLine("ERREUR DANS LA REQUETE DELETE");
+                Log.Error("Erreur dans la requête DELETE pour la commande.");
             }
             return false;
         }
 
-        //Modifie l'étape de suivi d'une commande
+        /// <summary>
+        /// Modifie l'étape de suivi d'une commande document.
+        /// </summary>
+        /// <param name="id">Identifiant de la commande document.</param>
+        /// <param name="idSuivi">Nouvel identifiant de suivi.</param>
+        /// <returns>True si la modification a réussi, sinon False.</returns>
         public bool ModifierSuiviCommandeDocument(string id, string idSuivi)
         {
             String jsonIdSuivi = "{ \"idSuivi\" : \"" + idSuivi + "\"}";
@@ -270,7 +280,7 @@ namespace MediaTekDocuments.dal
             }
             catch 
             {
-                Console.WriteLine("ERREUR DANS LA REQUETE PUT");
+                Log.Error("Erreur dans la requête PUT pour la modification du suivi de la commande.");
             }
             return false;
         }
@@ -303,7 +313,7 @@ namespace MediaTekDocuments.dal
             }
             catch 
             {
-                Console.WriteLine("ERREUR DANS LA REQUETE POST POUR L'ABONNEMENT");
+                Log.Error("Erreur dans la requête POST POUR L'ABONNEMENT");
             }
             return false;
         }
@@ -322,7 +332,7 @@ namespace MediaTekDocuments.dal
             }
             catch
             {
-                Console.WriteLine("Erreur dans la requête delete pour l'abonnement");
+                Log.Error("Erreur dans la requête DELETE pour l'abonnement.");
             }
             return false;
         }
